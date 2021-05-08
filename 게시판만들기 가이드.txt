@@ -1,0 +1,86 @@
+				jsp 게시판 만들기 가이드라인
+========================================================================
+ 				 Database 생성 부분
+ 				 ↓ ↓ ↓ ↓ ↓ ↓ ↓
+1. mariadb 접속 후 데이터베이스 생성
+
+2. Board테이블 생성 (테이블 생성시 iboard, title, content, reg_date)
+   타입과 키값, 옵션들 생각하기! ( hint : auto_increment, primary key, default now(), not null )
+========================================================================
+* 틈틈히 한 부분까지 잘 되는지 실행 해보기
+========================================================================
+       				       eclipse
+ 				↓ ↓ ↓ ↓ ↓ ↓ ↓
+1. dynamic web project 생성
+
+2. db jdbc driver와 jstl.jar 파일을 톰켓 lib에 넣기 (-> 이렇게 하면 프로젝트마다 안해줘도 되고 항상 적용이 됨 = 항상 톰캣을 참조함)
+
+3. web-inf 폴더안에 view 폴더 생성 -> list.jsp 생성, src/main/java에 package 만들고 BoardListServlet만들기
+
+4. list(get)서블릿에서 list.jsp로 가는 문장 만들기
+- list.jsp에서 사용할 내용 받아서 setAttribute하기
+
+5. list.jsp에 a태그로 글쓰기 서블릿으로 가는 문장 만들기
+- <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 상단에 적어주기 = jstl taglib uri
+
+6. write.jsp 생성 -> write.jsp로 갈수 있는 서블릿만들고 문장 만들기
+
+7. write.jsp에서 제목과 내용을 작성할 수 있는 form태그 만들기
+	(submit누를시 post방식으로 write서블릿으로 가도록)
+
+8. BoardVO.class 파일 생성 -> iboard, title, content, reg_date선언 getters and setters 생성
+
+9. DbUtil.class 파일 생성 -> 전에 쓰던 파일 복붙 가능 (database명이 달라졌으면 url부분 수정)
+
+10. 다시 7번부터 이어서 write(post)서블릿에서 어떤 값을 받을지 생각하고 작성
+
+11. BoardVO 객체 생성, setter이용하여 값 담기
+
+12. BoardDAO파일 생성 -> insert(static)하는 메소드 작성 (인자값으로 무엇을 받을지 리턴값을 무엇을 할지 생각)
+
+13. write(post)서블릿에서 insert메소드 호출 -> list(get)서블릿으로 이동하는 문장 작성
+
+14. list서블릿에서 list.jsp가기 전 모든 게시글을 가지고 가야 하므로 DAO파일에서 selBoardList(static)메소드생성
+
+15. list(get)서블릿에서 selBoardList메소드 호출 -> setAttribute
+
+16. list.jsp에 table태그 작성 tr th, td
+    <c:for Each>문 활용 전체 게시글 뿌리기
+
+17. for Each tr태그에 onclick="moveToDetail( ??? )" 작성
+     script문을 통해 moveToDetail 함수 정의
+
+18. detail 서블릿, detail.jsp 생성
+
+19. detail(get)서블릿에서 어떤 값 받을지 생각 하고 작성
+
+20. detail에서 한 게시물만 가져올 SelBoard(static)메소드 작성 (인자값과 리턴값 생각)
+
+21. setAttribute에 담기
+
+22. detail.jsp에서 해당 글의 title과 content이 value값으로 보여야함
+
+23. detail.jsp에 삭제와 수정할수 있는 A태그 작성 (해당 서블릿으로 갈때 어떤 값을 들고가야할지 생각)
+    (* 쿼리스트링)
+
+24. del서블릿 생성 -> 쿼리스트링에서 사용한 키값 받고 DAO에서 deleteBoard메소드 작성 (인자값과 리턴값 생각)
+
+25. del(get)서블릿에서 deleteBoard메소드 호출 후 list(get)으로 이동하는 문장 작성
+
+26. mod서블릿과 mod.jsp 생성 -> mod(get)서블릿에서 iboard값 받기
+
+27. SelBoard메소드 호출하고 setAttribute에 담기
+
+28. mod.jsp에서 write.jsp와 동일하게 폼태그 작성 (title과 content에 value값으로 나타나도록)
+     method : post, action : /mod	               post방식이기때문에 쿼리스트링이 안됨
+	
+29. mod(post)서블릿에서 값 받기 -> DAO에서 updateBoard메소드 작성 (인자값과 리턴값 생각)
+
+30. mod(post)서블릿에서 updateBoard메소드 호출
+     -> detail(get)서블릿으로 이동! 이동할때 어떤값 가져갈지 생각하기
+
+게시판 완성
+
+★ 게시판에 중요한 부분 !!
+- 프로그램이 돌아가는 흐름(구조)
+- DAO에서 메소드를 만들때 리턴값과 인자값에 뭘 넣어야하는지
