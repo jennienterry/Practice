@@ -21,7 +21,14 @@ public class ListServlet extends HttpServlet {
 		
 		String jsp = "/WEB-INF/view/list.jsp";
 		request.getRequestDispatcher(jsp).forward(request,response);
-			
+		
+		// * MyUtils class에 static 안붙은 경우 //
+		// MyUtils utils = new MyUtils();// 객체화 계속되면 메모리적으로 불리함
+		// utils.openJSP(jsp, request, response);
+					
+				
+		// * MyUtils class에 static 붙은 경우 //
+		openJSP(jsp, request, response);
 			
 	}
 
