@@ -25,7 +25,6 @@ public class MyUtils {// 클래스 하나 만들기
 		}
 	
 	
-	
 	public static void openJSP(String fileNm, HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException{
 					//request.getRequestDispatcher(fileNm).forward(request,response);		
 					
@@ -34,14 +33,14 @@ public class MyUtils {// 클래스 하나 만들기
 					 * 2. 아니니까 메모리에 안올라가있음 -> 사용하기 전에 메모리에 올리기 (올리고 나서 호출)
 					 * * 자바는 class 단위로만 1급 객체가 될 수 있음 = 클래스를 객체화해야함 = 필요한 것만 클래스화하기, 안에 여러개 넣지*
 					*/
+		
 					String jsp = "/WEB-INF/view/" + fileNm + ".jsp";
 					request.getRequestDispatcher(jsp).forward(request,response);
-					
-					
+					// request.getRequestDispatche(jsp).forward(request,response); 위 두줄과 같은의미
 					
 			// throws ServletException, IOException (= do get에 있는 예외, 가 있으면 try, catch 안해도 됨) <-> throws Exception
 			
-			// request.getRequestDispatche(jsp).forward(request,response);
+			
 					
 			}
 			

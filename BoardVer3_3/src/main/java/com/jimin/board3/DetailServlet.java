@@ -19,15 +19,15 @@ public class DetailServlet extends HttpServlet {
 		int iboard = MyUtils.getParamInt("iboard", request);
 		
 		BoardVO vo = new BoardVO (); 
-		vo.setIboard(intIboard);
-		//vo = BoardDAO.selBoard(vo);
+		vo.setIboard(iboard);
+//		vo = BoardDAO.selBoard(vo);
 		request.setAttribute("vo", BoardDAO.selBoard(vo));
 		
-		//String jsp = "/WEB-INF/view/detail.jsp";
-		//request.getRequestDispatcher(jsp).forward(request, response);
+		String jsp = "/WEB-INF/view/detail.jsp";
+		request.getRequestDispatcher(jsp).forward(request, response);
 		
-		String jsp = "/WEB-INF/view/" + fileNm + ".jsp";
-		utils.openJSP(jsp, request, response);
+//		String jsp = "/WEB-INF/view/" + fileNm + ".jsp";
+//		MyUtils.openJSP(jsp, request, response);
 	}
 
 	

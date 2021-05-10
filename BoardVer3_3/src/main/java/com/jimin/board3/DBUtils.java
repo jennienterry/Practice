@@ -19,8 +19,6 @@ public class DBUtils {
 	}
 	
 	
-	
-	
 	public static void close(Connection con, PreparedStatement ps) {
 		close(con,ps,null);
 	}
