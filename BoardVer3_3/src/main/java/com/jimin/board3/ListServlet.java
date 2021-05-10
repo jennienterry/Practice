@@ -19,6 +19,7 @@ public class ListServlet extends HttpServlet {
 		request.setAttribute("list", list);
 		
 		
+		
 		String jsp = "/WEB-INF/view/list.jsp";
 		request.getRequestDispatcher(jsp).forward(request,response);
 		

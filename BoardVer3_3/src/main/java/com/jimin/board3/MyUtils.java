@@ -37,6 +37,8 @@ public class MyUtils {// 클래스 하나 만들기
 					String jsp = "/WEB-INF/view/" + fileNm + ".jsp";
 					request.getRequestDispatcher(jsp).forward(request,response);
 					
+					
+					
 			// throws ServletException, IOException (= do get에 있는 예외, 가 있으면 try, catch 안해도 됨) <-> throws Exception
 			
 			// request.getRequestDispatche(jsp).forward(request,response);
